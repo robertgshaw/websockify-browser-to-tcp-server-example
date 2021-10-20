@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Websocket Demo</title>
+  </head>
+  <body>
+    <h1>Websocket Demo</h1>
+    <div id="log"></div>
+    <br>
+    <form id="form">
+      <label for="text">Input: </label>
+      <input type="text" id="text" autofocus>
+    </form>
+
+    <script>
+      const log = (text, color) => {
+        document.getElementById('log').innerHTML += `<span style="color: ${color}">${text}</span><br>`;
+      };
+
+      // connect websocket back to localhost
+      const socket = new WebSocket("ws://localhost:27016");
+
+      // open event
+      socket.addEventListener('open', function (event) {
+          console.log("open connection");
+      });
+
+      // close event
+      socket.addEventListener('close', function (event) {
+        console.log("closed connection");
+      });
+
+      // message recieved from server event
+      socket.addEventListener('message', ev => {
+        console.log("message from server");
+
+        // parses event.data from Blob into text
+        if (ev.data instanceof Blob) {
+          reader = new FileReader();
+          reader.onload = () => {
+            log('<<< ' + reader.result, 'blue');
+          };
+          reader.readAsText(ev.data);
+        } else {
+            log('<<< ' + ev.data, 'blue');
+        }
+      });
+
+      // send message to server after submit
+      document.getElementById('form').onsubmit = ev => {
+        ev.preventDefault();
+        const textField = document.getElementById('text');
+        log('>>> ' + textField.value, 'red');
+        socket.send(textField.value);
+        textField.value = '';
+      };
+    </script>
+  </body>
+</html>
