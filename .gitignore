@@ -1,5 +1,6 @@
 test-client
 test-server-linux
 websockify-js-master/
+test-client.cpp
 *.exe
 *.PNG

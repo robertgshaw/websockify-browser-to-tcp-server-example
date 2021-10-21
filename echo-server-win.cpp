@@ -9,13 +9,14 @@
 #include <ws2tcpip.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
 
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
 // #pragma comment (lib, "Mswsock.lib")
 
 #define DEFAULT_BUFLEN 512
-#define DEFAULT_PORT "27015"
+#define DEFAULT_PORT "5000"
 
 int __cdecl main(void) 
 {
@@ -53,8 +54,6 @@ int __cdecl main(void)
         return 1;
     }
 
-    printf("ai_family = [%d], ai_socktype = [%d], ai_protocol = [%d]\n", result->ai_family, result->ai_socktype, result->ai_protocol);
-
     // Create a SOCKET for connecting to server
     ListenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
     if (ListenSocket == INVALID_SOCKET) {
@@ -84,7 +83,6 @@ int __cdecl main(void)
         return 1;
     }
 
-    printf("about to accept");
     // Accept a client socket
     ClientSocket = accept(ListenSocket, NULL, NULL);
     printf("accepted");
