@@ -62,7 +62,7 @@ As I looked into how to solve this problem, there were a few things I stumbled u
 - Run `npm install` to install the dependencies. 
  
 **3. Run `websockify`** 
-- Run the server by calling `node websockify.js --web ../../ localhost:27016 localhost:5000` in the `\websockify-js-master\websockify` folder. 
+- Run `node websockify.js --web ../../ localhost:27016 localhost:5000` in the `\websockify-js-master\websockify` directory. 
 - The `--web [DIR]` command runs a mini web server on the same port where the proxy is running (`../../` is where `index.html` is located). 
 - The `localhost:27016 localhost:5000` command instructs `websockify` to accept `WebSocket` connections on `27016` and forward them to traditional `TCP` sockets on `5000`.
 
