@@ -12,11 +12,11 @@ As part of this, I wanted to expand this project to make the client into a Web-b
 
 As I looked into how to solve this problem, there were a few things I stumbled upon. 
 
-**1.`Socket.IO`** 
+**1. `Socket.IO`** 
 - Socket.IO is a common library that implements an even higher level protocol on top WebSockets. 
 - Serveral common Web Frameworks / languages appear to hav good support for `Socket.IO`, including `flask` which you can see [here](https://flask-socketio.readthedocs.io/en/latest/) and `node`. Unfortunately, I could not find a server side implementation of `Socket.IO` in C++ (though there are some clients available). So this was a no go, but might be a good option if you have a `python` or `node` application.
  
-**2.`Refactoring my C++ server to directly use `WebSockets`** 
+**2. Refactoring my C++ server to directly use `WebSockets`** 
 - I could have used the `WebSocket` API directly in my C++, which would have required me to refactor my existing codebase to use the higher level protocol. This would have required either implementing the `WebSocket` protocol by hand or using a 3rd party implementation of `WebSockets`. I did not want to reinvent the wheel by reimplementing the handshake and overall `WebSocket` protocol, so the only approach I considered was looking for a 3rd party app.
 - This approach had 2 drawbacks, however. First, I could not find a well-accepted library which implements the handshake and overhead code (i.e. this was not in the stdlib). Second, I would have had to re-write my game server (which I had already built to rely on TCP) which would have taken considerable effort. 
 
